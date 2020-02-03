@@ -17,7 +17,8 @@ Route::get('/', function () {
 });
 
 Route::get('/about', function () {
-    return view('about');
+    $nama = 'Kai';
+    return view('about',['nama' => $nama]); // associative array, yang nanti akan dipanggin di view about
 });
 
 Route::get('/mahasiswa', function () {
