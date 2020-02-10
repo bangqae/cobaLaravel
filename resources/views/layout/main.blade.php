@@ -24,7 +24,7 @@
           <div class="navbar-nav">
             <a class="nav-item nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
             <a class="nav-item nav-link {{ (request()->is('about')) ? 'active' : '' }}" href="{{ url('/about') }}">About</a>
-            <a class="nav-item nav-link" href="{{ url('/mahasiswa') }}">Mahasiswa</a>
+            <a class="nav-item nav-link {{ (request()->is('mahasiswa')) ? 'active' : '' }}" href="{{ url('/mahasiswa') }}">Mahasiswa</a>
             <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </div>
         </div>

@@ -1,4 +1,4 @@
-@extends('layout/main')
+@extends('layout.main')<!-- "." merupakan pengganti "/" -->
 
 @section('title', 'Home')
 

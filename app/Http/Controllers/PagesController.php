@@ -8,7 +8,7 @@ class PagesController extends Controller
 {
     /* 
     | Method untuk memanggil view
-    | Pada method about sekaligus mengirimkan variabel $nama
+    | Pada method about sekaligus mengirimkan variabel nama
     */
     public function home()
     {

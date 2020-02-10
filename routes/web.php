@@ -11,25 +11,7 @@
 |
 */
 
-//root
-// Route::get('/', function () {
-//     return view('index');
-// });
-
-// Route::get('/about', function () {
-//     $nama = 'Kai';
-//     return view('about',['nama' => $nama]); // associative array, yang nanti akan dipanggin di view about
-// });
-
-// Route::get('/mahasiswa', function () {
-//     return view('mahasiswa');
-// });
-
-// Route::get('/welcome', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', 'PagesController@home');
 Route::get('/about', 'PagesController@about');
 
-Route::get('/mahasiswa', 'MahasiswaController@show');
+Route::get('/mahasiswa', 'MahasiswaController@index');
