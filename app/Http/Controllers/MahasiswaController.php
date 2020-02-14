@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; //panggil method DB
 
 class MahasiswaController extends Controller
 {
@@ -13,7 +14,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        return view('mahasiswa.index');
+        $mahasiswa = DB::table('mahasiswa')->get(); //menggunakan method DB untuk memanggil data
+        return view('mahasiswa.index', ['mahasiswa'=> $mahasiswa]); //kirim data ke blade
     }
 
     /**
