@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //panggil method DB
+use App\Student; //model Student (Eloquent)
 
 class MahasiswaController extends Controller
 {
@@ -14,8 +15,10 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mahasiswa = DB::table('mahasiswa')->get(); //menggunakan method DB untuk memanggil data
-        return view('mahasiswa.index', ['mahasiswa'=> $mahasiswa]); //kirim data ke blade
+        // $mahasiswa = DB::table('students')->get(); //menggunakan method DB untuk memanggil data (Query Builder)
+        $mahasiswa = Student::all(); //memanggil class Student di model Student (Eloquent)
+        return view('mahasiswa.index', ['mahasiswa'=> $mahasiswa]); //kirim data ke blade index yang ada di dalam folder mahasiswa
+        //return view('mahasiswa.index',compact('mahasiswa')); //cari kenapa bisa menggunakan compact
     }
 
     /**
