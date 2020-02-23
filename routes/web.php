@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', 'PagesController@home'); // memanggil method home yg ada di dalam file PagesController
+Route::get('/', 'PagesController@home'); //memanggil method home yg ada di dalam file PagesController
 Route::get('/about', 'PagesController@about');
 
 Route::get('/mahasiswa', 'MahasiswaController@index');
 
 //Students
 Route::get('/students', 'StudentsController@index');
-Route::get('/students/{student}', 'StudentsController@show');
+Route::get('/students/create', 'StudentsController@create'); //create new data
+Route::get('/students/{student}', 'StudentsController@show'); //show data details
+Route::post('/students', 'StudentsController@store'); //store or save data

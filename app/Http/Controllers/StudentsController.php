@@ -25,7 +25,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('students.create');
     }
 
     /**
@@ -36,7 +36,36 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$request adalah isi dari inputan dari method create
+        
+        $request->validate([
+            'nama' => 'required',
+            'nrp' => 'required|size:9',
+            'email' => 'required',
+            'jurusan' => 'required'
+        ]);
+
+        //cara pertama
+        // $student = new Student;
+        // $student->nama = $request->nama;
+        // $student->nrp = $request->nrp;
+        // $student->email = $request->email;
+        // $student->jurusan = $request->jurusan;
+        // $student->save();
+        
+        //cara kedua
+        //jika ingin menambahkan data dengan create, harus menambahkan properti fillable (yg boleh boleh diisi manual) atau guarded (yg tidak boleh diisi manual) di modelnya
+        // Student::create([
+        //     'nama' => $request->nama,
+        //     'nrp' => $request->nrp,
+        //     'email' => $request->email,
+        //     'jurusan' => $request->jurusan,
+        // ]);
+        
+        //cara ketiga
+        Student::create($request->all()); //all yang dimaksud adalah hanya yg diperbolehkan diisi (fillable)
+
+        return redirect('/students')->with('status', 'Data berhasil ditambahkan!'); //kembali ke view student.index beserta kirim status
     }
 
     /**
