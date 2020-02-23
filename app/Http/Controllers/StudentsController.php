@@ -38,12 +38,21 @@ class StudentsController extends Controller
     {
         //$request adalah isi dari inputan dari method create
         
+        $messages = [ //custom error message
+            'nama.required' => 'Nama tidak boleh kosong',
+            'nrp.required' => 'NRP tidak boleh kosong',
+            'nrp.size' => 'NRP harus 9 digit',
+            'email.required' => 'Email tidak boleh kosong',
+            'jurusan.required' => 'Jurusan tidak boleh kosong',
+
+        ];
+        
         $request->validate([
             'nama' => 'required',
             'nrp' => 'required|size:9',
             'email' => 'required',
             'jurusan' => 'required'
-        ]);
+        ], $messages); //tambahkan disini
 
         //cara pertama
         // $student = new Student;
