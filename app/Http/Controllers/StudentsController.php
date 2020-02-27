@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use Illuminate\Http\Request;
+use App\Http\Requests\modelUpdate; //kelas requests model update untuk validasi
 
 class StudentsController extends Controller
 {
@@ -40,19 +41,21 @@ class StudentsController extends Controller
         
         $messages = [ //custom error message
             'nama.required' => 'Nama tidak boleh kosong',
+            'nrp.unique' => 'NRP sudah ada',
             'nrp.required' => 'NRP tidak boleh kosong',
-            'nrp.size' => 'NRP harus 9 digit',
+            'nrp.numeric' => 'NRP harus berupa angka',
+            'nrp.digits' => 'NRP harus :digits digit',
+            'email.unique' => 'Email sudah digunakan',
             'email.required' => 'Email tidak boleh kosong',
-            'jurusan.required' => 'Jurusan tidak boleh kosong',
-
+            'jurusan.required' => 'Jurusan tidak boleh kosong'
         ];
         
         $request->validate([
             'nama' => 'required',
-            'nrp' => 'required|size:9',
-            'email' => 'required',
+            'nrp' => 'digits:9|unique:students|required|numeric',
+            'email' => 'unique:students|required|email',
             'jurusan' => 'required'
-        ], $messages); //tambahkan disini
+        ], $messages); //tambahkan custom error message disini
 
         //cara pertama
         // $student = new Student;
@@ -96,7 +99,7 @@ class StudentsController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('students.edit', compact('student'));
     }
 
     /**
@@ -106,9 +109,16 @@ class StudentsController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(modelUpdate $request, Student $student)  //tulis rules ciri2 data di modelUpdate
     {
-        //
+        Student::where('id', $student->id)
+            ->update([
+                'nama' => $request->nama,
+                'nrp' => $request->nrp,
+                'email' => $request->email,
+                'jurusan' => $request->jurusan
+            ]);
+            return redirect('/students')->with('status', 'Data berhasil diubah!'); //kembali ke view student.index beserta kirim status
     }
 
     /**
@@ -119,6 +129,7 @@ class StudentsController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        Student::destroy($student->id);
+        return redirect('/students')->with('status', 'Data berhasil dihapus!'); //kembali ke view student.index beserta kirim status
     }
 }
